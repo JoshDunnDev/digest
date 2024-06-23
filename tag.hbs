@@ -1,21 +1,23 @@
 {{!< default}}
 
-<main id="gh-main" class="gh-main gh-canvas">
-    {{#tag}}
-        <section class="gh-pagehead">
-            <header class="gh-pagehead-content">
-                <h1 class="gh-tag-name gh-pagehead-title">{{name}}</h1>
+{{#tag}}
 
-                <div class="gh-tag-description gh-pagehead-description">
-                    {{#if description}}
-                        {{description}}
-                    {{else}}
-                        A collection of {{plural ../pagination.total empty="0 issues" singular="% issue" plural="% issues"}}
-                    {{/if}}
-                </div>
-            </header>
-        </section>
+<main id="gh-main" class="gh-main">
+<article class="gh-article post no-image">
+    <header class="gh-article-header gh-canvas">
+        <h1 class="gh-article-title">{{name}}</h1>
+    </header>
 
+    {{#if description}}
+    <section class="gh-content gh-canvas">
+        <p>
+            {{description}}
+        </p>
+    </section>
+    {{/if}}
+
+    <div class="gh-canvas">
+        <hr class="gh-divider extended-divider">
         <div class="gh-feed">
             {{#get "posts" filter="tags:{{slug}}" limit="all"}}
                 {{#foreach posts}}
@@ -23,5 +25,10 @@
                 {{/foreach}}
             {{/get}}
         </div>
-    {{/tag}}
+    </div>
+
+
+</article>
 </main>
+
+{{/tag}}
