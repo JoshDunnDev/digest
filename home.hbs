@@ -1,0 +1,33 @@
+{{!< default}}
+
+<main id="gh-main" class="gh-main">
+    <section class="p-outer">
+        <div class="p-inner p-hero">
+            <div class="p-hero-left">
+            <div>
+                <h1>Welcome, Plant Lovers 👋</h1>
+                <p>This is <strong>Carol's Carnivorous Plants</strong>, and, as you may have guessed, I'm Carol.</p>
+                <p>I grow carnivorous plants and <em>live</em>to write about it.</p>
+                <p>I've been growing, breeding, studying, and loving these plants for more than 25 years.</p>
+                <p>Join me at my <a href="https://plantsbycarol.com"> nursery</a> or right here for Venus flytraps, sundews, Sarracenias, and more.</p>
+            </div>
+            <div class="p-hero-buttons">
+                {{! Launches the Ghost membership portal }}
+                <button data-portal="signup">Subscribe</button>
+                {{! Link to an about page }}
+                <a href="/about/">Learn more &rarr;</a>
+            </div>
+            </div>
+            <div class="p-hero-right">
+            {{! Loads the your cover image as defined in Ghost admin }}
+            <img src="{{img_url @site.cover_image size="l"}}" alt="Pitcher plants" />
+            </div>
+        </div>
+    </section>
+    {{#foreach posts limit="1"}}
+        <article class="gh-article {{post_class}}">
+            {{> content}}
+        </article>
+    {{/foreach}}
+</main>
+
