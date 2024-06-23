@@ -107,8 +107,12 @@ body {
 .gh-card-excerpt {
   font-size: 1.8rem;
   line-height: 1.5;
-  color: var(--color-secondary-text);
+  color: var(--color-primary-text);
   word-break: break-word;
+}
+
+.gh-card-excerpt::after {
+  content: "...";
 }
 
 .gh-card-footer {
