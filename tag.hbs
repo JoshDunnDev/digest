@@ -19,7 +19,7 @@
     <div class="gh-canvas">
         <hr class="gh-divider extended-divider-tag">
         <div class="gh-feed">
-            {{#get "posts" filter="tags:{{slug}}" limit="all"}}
+            {{#get "posts" filter="tags:{{slug}}" limit="all" include="authors"}}
                 {{#foreach posts}}
                     {{> loop}}
                 {{/foreach}}

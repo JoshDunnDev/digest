@@ -117,7 +117,7 @@
   color: var(--ghost-accent-color);
 }
 
-.gh-home-content {
+.gh-home-excerpt {
   margin-top: 1rem !important;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -136,6 +136,10 @@
 
 .gh-meta-expansion {
   margin-top: 1rem;
+}
+
+.gh-navigation-home {
+  padding-top: 0 !important;
 }
 
 /* Change layout at larger viewport sizes */
