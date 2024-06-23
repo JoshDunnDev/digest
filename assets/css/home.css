@@ -125,17 +125,31 @@
   overflow: hidden;
 }
 
-.gh-authors,
 .gh-text-separator {
   margin-right: 0.75rem;
 }
 
-.gh-authors a {
+.gh-meta-expansion {
+  margin-top: 1.6rem;
+}
+
+.gh-article-meta-container a,
+.gh-meta-expansion a {
   color: var(--color-secondary-text);
 }
 
-.gh-meta-expansion {
-  margin-top: 1rem;
+.gh-article-meta-container {
+  display: flex;
+}
+
+.gh-meta-expansion a:first-child {
+  display: flex;
+  pointer-events: none;
+}
+
+.gh-article-meta-container time,
+.gh-meta-expansion time {
+  margin-right: 0.75rem;
 }
 
 .gh-navigation-home {

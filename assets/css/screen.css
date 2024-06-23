@@ -79,11 +79,13 @@ body {
   border-top: 1px solid var(--color-light-gray);
 }
 
-.gh-card-link {
+.gh-card-link,
+.gh-card-link-main {
   display: block;
 }
 
-.gh-card-link:hover {
+.gh-card-link:hover,
+.gh-card-link-main:hover {
   opacity: 1;
 }
 
@@ -100,7 +102,8 @@ body {
   transition: color 0.1s ease-in-out;
 }
 
-.gh-card-link:hover .gh-card-title {
+.gh-card-link:hover .gh-card-title,
+.gh-card-link-main:hover .gh-card-title {
   text-decoration: underline;
 }
 
@@ -138,7 +141,7 @@ body {
   margin-top: 2.4rem;
 }
 
-.gh-featured .gh-card-link {
+.gh-featured .gh-card-link-main {
   padding: 3.6rem 3.2rem;
 }
 
@@ -462,7 +465,7 @@ body:not(.home-template) .gh-article-image {
     border-radius: 0;
   }
 
-  .gh-featured .gh-card-link {
+  .gh-featured .gh-card-link-main {
     padding-right: var(--gap);
     padding-left: var(--gap);
   }

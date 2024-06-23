@@ -3,7 +3,16 @@
         {{#is "home"}}
             <span class="gh-article-label">Latest post</span>
         {{/is}}
-        <time class="gh-article-date" datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time>
+        <div class="gh-article-meta-container">
+            <time
+            class="gh-article-date"
+            datetime="{{date format="YYYY-MM-DD"}}"
+            >{{date}}</time>
+            <div class="gh-text-separator">|</div>
+            <div class="gh-authors">
+            {{authors separator=", "}}
+            </div>
+        </div>
     </div>
 
     <h1 class="gh-article-title">{{title}}</h1>

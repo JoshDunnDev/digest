@@ -8,14 +8,14 @@
       <div class="gh-card-excerpt gh-home-excerpt">{{excerpt}}</div>
 
       <div class="gh-article-meta gh-meta-expansion">
-        <div class="gh-authors">
-          {{authors separator=", "}}
-        </div>
-        <div class="gh-text-separator">|</div>
         <time
           class="gh-article-date"
           datetime="{{date format="YYYY-MM-DD"}}"
         >{{date}}</time>
+        <div class="gh-text-separator">|</div>
+        <div class="gh-authors">
+          {{authors separator=", "}}
+        </div>
       </div>
     </a>
   </article>

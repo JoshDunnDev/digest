@@ -1,22 +1,26 @@
 <article class="gh-card {{post_class}}">
-  <a class="gh-card-link" href="{{url}}">
-    <header class="gh-card-header">
-      <h2 class="gh-card-title">{{title}}</h2>
-    </header>
+  <a href="{{url}}">
+    <section class="gh-card-link-main">
+      <header class="gh-card-header">
+        <h2 class="gh-card-title">{{title}}</h2>
+      </header>
 
-    <div class="gh-card-excerpt">{{excerpt}}</div>
+      <div class="gh-card-excerpt">{{excerpt}}</div>
 
-    <footer class="gh-card-footer">
       <div class="gh-article-meta gh-meta-expansion">
-        <div class="gh-authors">
-          {{authors separator=", "}}
-        </div>
-        <div class="gh-text-separator">|</div>
         <time
           class="gh-article-date"
           datetime="{{date format="YYYY-MM-DD"}}"
         >{{date}}</time>
+        {{#if authors}}
+          <div class="gh-text-separator">|</div>
+        {{/if}}
+        <div class="gh-authors">
+          {{authors separator=", "}}
+        </div>
+
       </div>
-    </footer>
+    </section>
+
   </a>
 </article>
