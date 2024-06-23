@@ -5,9 +5,7 @@
 }
 
 .p-outer:first-of-type {
-  background-color: rgb(
-    55 99 255 / 0.06
-  ); /* Light background color of hero section */
+  background-color: var(--color-lighter-gray);
 }
 
 .p-inner {
