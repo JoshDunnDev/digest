@@ -1,0 +1,22 @@
+{{#foreach posts}}
+  <article class="gh-article {{post_class}}">
+    <header class="gh-article-header">
+      <h3 class="gh-article-title"><a href="{{url}}">{{title}}</a></h3>
+    </header>
+
+    <section class="gh-content gh-home-content">
+      {{content}}
+    </section>
+
+    <div class="gh-article-meta gh-meta-expansion">
+      <div class="gh-authors">
+        {{authors separator=", "}}
+      </div>
+      <div class="gh-text-separator">|</div>
+      <time
+        class="gh-article-date"
+        datetime="{{date format="YYYY-MM-DD"}}"
+      >{{date}}</time>
+    </div>
+  </article>
+{{/foreach}}

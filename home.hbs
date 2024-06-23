@@ -1,21 +1,47 @@
 {{!< default}}
 
 <main class="main">
-    <section class="p-outer">
-        <div class="p-inner p-hero">
-            <div class="p-hero-text-container">
-                <h1>The Small Account Day Trader's Journey</h1>
-                <p>Follow my day trading journey with a small account. Discover strategies, daily recaps, tools, and insights as I aim for financial freedom. Let's trade tiny and dream big!</p>
-            </div>
-            <div class="p-hero-buttons">
-                <button data-portal="signup">Subscribe</button>
-            </div>
-        </div>
-    </section>
-    {{#foreach posts limit="1"}}
-        <article class="gh-article {{post_class}}">
-            {{> content}}
-        </article>
-    {{/foreach}}
-</main>
+  <section class="p-outer">
+    <div class="p-inner p-hero">
+      <div class="p-hero-text-container">
+        <h1>The Small Account Day Trader's Journey</h1>
+        <p>Follow my day trading journey with a small account. Discover
+          strategies, daily recaps, tools, and insights as I aim for financial
+          freedom. Let's trade tiny and dream big!</p>
+      </div>
+      <div class="p-hero-buttons">
+        <button data-portal="signup">Subscribe</button>
+      </div>
+    </div>
+  </section>
 
+  <section class="p-inner">
+      <header class="gh-article-header">
+        <div class="gh-article-meta">
+            <span class="gh-article-label">Featured posts</span>
+        </div>
+      </header>
+      <div class="p-posts-grid">
+        {{! Use the get helper to fetch posts }}
+        {{#get "posts" filter='featured:true' limit="3" include="authors"}}
+            {{> home-posts}}
+        {{/get}}
+      </div>
+  </section>
+
+  <hr class="gh-divider extended-divider">
+  
+  <section class="p-inner">
+      <header class="gh-article-header">
+        <div class="gh-article-meta">
+            <span class="gh-article-label">Latest posts</span>
+        </div>
+      </header>
+      <div class="p-posts-grid">
+        {{! Use the get helper to fetch posts }}
+        {{#get "posts" limit="3" include="authors"}}
+            {{> home-posts}}
+        {{/get}}
+      </div>
+  </section>
+</main>

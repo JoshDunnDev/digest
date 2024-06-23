@@ -294,7 +294,8 @@ body:not(.home-template) .gh-article-image {
   line-height: 1.5;
   text-transform: uppercase;
   letter-spacing: 0.01em;
-  border-top: 2px solid var(--color-darker-gray);
+  display: flex;
+  justify-content: center;
 }
 
 .gh-article-footer.no-border .gh-navigation {
