@@ -125,6 +125,13 @@
   overflow: hidden;
 }
 
+.gh-card-title-home {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .gh-text-separator {
   margin-right: 0.75rem;
 }
