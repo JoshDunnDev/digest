@@ -435,6 +435,10 @@ body:not(.home-template) .gh-article-image {
   margin: 30px 0 !important;
 }
 
+.extended-divider-tag {
+  margin: 4.8rem 0 !important;
+}
+
 @media (max-width: 767px) {
   .gh-head-description {
     display: none;
