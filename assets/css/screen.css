@@ -76,7 +76,7 @@ body {
 .gh-feed .gh-card + .gh-card {
   padding-top: 4.8rem;
   margin-top: 4.8rem;
-  border-top: 1px solid var(--color-darker-gray);
+  border-top: 1px solid var(--color-light-gray);
 }
 
 .gh-card-link {
