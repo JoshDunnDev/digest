@@ -12,11 +12,18 @@
           class="gh-article-date"
           datetime="{{date format="YYYY-MM-DD"}}"
         >{{date}}</time>
-        <div class="gh-text-separator">|</div>
-        <div class="gh-authors">
-          {{authors separator=", "}}
-        </div>
+        {{#if authors}}
+          <div class="gh-text-separator">|</div>
+          <div class="gh-authors">
+            {{authors separator=", "}}
+          </div>
+        {{/if}}
       </div>
+      {{#if tags}}
+        <div class="gh-tags">
+          {{tags separator=", "}}
+        </div>
+      {{/if}}
     </a>
   </article>
 {{/foreach}}

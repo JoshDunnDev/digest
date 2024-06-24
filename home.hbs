@@ -24,7 +24,7 @@
         </header>
         <div class="p-posts-grid">
           {{! Use the get helper to fetch posts }}
-          {{#get "posts" filter='featured:true' limit="3" include="authors"}}
+          {{#get "posts" filter='featured:true' limit="3" include="tags,authors"}}
               {{> home-posts}}
           {{/get}}
         </div>
@@ -42,7 +42,7 @@
         </header>
         <div class="p-posts-grid">
           {{! Use the get helper to fetch posts }}
-          {{#get "posts" limit="3" include="authors"}}
+          {{#get "posts" limit="3" include="tags,authors"}}
               {{> home-posts}}
           {{/get}}
         </div>
