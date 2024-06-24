@@ -1,7 +1,7 @@
 {{!< default}}
 
 <main class="main">
-  <section class="p-outer">
+  <section class="p-outer no-margin">
     <div class="p-inner p-hero">
       <div class="p-hero-text-container">
         <h1>The Small Account Day Trader's Journey</h1>
@@ -15,41 +15,44 @@
     </div>
   </section>
 
-  <section class="p-inner">
-      <header class="gh-article-header">
-        <div class="gh-article-meta">
-            <span class="gh-article-label">Featured posts</span>
+  <section class="p-outer no-margin">
+    <section class="p-inner">
+        <header class="gh-article-header">
+          <div class="gh-article-meta">
+              <span class="gh-article-label">Featured posts</span>
+          </div>
+        </header>
+        <div class="p-posts-grid">
+          {{! Use the get helper to fetch posts }}
+          {{#get "posts" filter='featured:true' limit="3" include="authors"}}
+              {{> home-posts}}
+          {{/get}}
         </div>
-      </header>
-      <div class="p-posts-grid">
-        {{! Use the get helper to fetch posts }}
-        {{#get "posts" filter='featured:true' limit="3" include="authors"}}
-            {{> home-posts}}
-        {{/get}}
-      </div>
-  </section>
+    </section>
 
-  <section class="p-inner">
-    <hr class="gh-divider extended-divider">
-  </section>
-
-  <section class="p-inner">
-      <header class="gh-article-header">
-        <div class="gh-article-meta">
-            <span class="gh-article-label">Latest posts</span>
-        </div>
-      </header>
-      <div class="p-posts-grid">
-        {{! Use the get helper to fetch posts }}
-        {{#get "posts" limit="3" include="authors"}}
-            {{> home-posts}}
-        {{/get}}
-      </div>
-
+    <section class="p-inner">
       <hr class="gh-divider extended-divider">
+    </section>
 
-      <nav class="gh-navigation gh-navigation-home">
-          <a class="gh-navigation-middle" href="/page/2"><span>Browse</span> all posts</a>
-      </nav>
+    <section class="p-inner">
+        <header class="gh-article-header">
+          <div class="gh-article-meta">
+              <span class="gh-article-label">Latest posts</span>
+          </div>
+        </header>
+        <div class="p-posts-grid">
+          {{! Use the get helper to fetch posts }}
+          {{#get "posts" limit="3" include="authors"}}
+              {{> home-posts}}
+          {{/get}}
+        </div>
+
+        <hr class="gh-divider extended-divider">
+
+        <nav class="gh-navigation gh-navigation-home">
+            <a class="gh-navigation-middle" href="/page/2"><span>Browse</span> all posts</a>
+        </nav>
+    </section>
   </section>
+
 </main>
