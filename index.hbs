@@ -15,7 +15,7 @@
         </header>
     </section>
 
-    {{#get "posts" filter="featured:true" include="authors" limit="all" as |featured|}}
+    {{#get "posts" filter="featured:true" include="authors,tags" limit="all" as |featured|}}
         {{#if featured}}
             <section class="gh-section gh-section-featured">
                 <h3 class="gh-section-title"><span>Featured</span></h3>
@@ -33,7 +33,7 @@
         <h3 class="gh-section-title"><span>Latest</span></h3>
 
         <div class="gh-feed">
-            {{#get "posts" limit="all" include="authors"}}
+            {{#get "posts" limit="all" include="authors,tags"}}
                 {{#foreach posts}}
                     {{> loop}}
                 {{/foreach}}

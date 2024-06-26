@@ -14,12 +14,16 @@
         >{{date}}</time>
         {{#if authors}}
           <div class="gh-text-separator">|</div>
+          <div class="gh-authors">
+            {{authors separator=", "}}
+          </div>
         {{/if}}
-        <div class="gh-authors">
-          {{authors separator=", "}}
-        </div>
-
       </div>
+      {{#if tags}}
+        <div class="gh-tags">
+          {{tags separator=", "}}
+        </div>
+      {{/if}}
     </section>
 
   </a>
