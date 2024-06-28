@@ -182,6 +182,13 @@
   color: #fff;
 }
 
+.gh-foot-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
 /* Change layout at larger viewport sizes */
 @media (min-width: 768px) {
   .p-hero {

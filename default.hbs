@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="msvalidate.01" content="EB9CC2E7B504F1FF7C32004D1BCFD9E3" />
     <title>{{meta_title}}</title>
     <link rel="stylesheet" href="{{asset "built/screen.css"}}">
 
@@ -93,14 +94,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <footer class="gh-foot{{#unless @site.secondary_navigation}} no-menu{{/unless}} gh-outer">
         <div class="gh-foot-inner gh-inner">
-            <div class="gh-copyright">
-                {{@site.title}} © {{date format="YYYY"}}
-            </div>
             {{#if @site.secondary_navigation}}
                 <nav class="gh-foot-menu">
                     {{navigation type="secondary"}}
                 </nav>
             {{/if}}
+            <div class="gh-copyright">
+                {{@site.title}} © {{date format="YYYY"}}
+            </div>
         </div>
     </footer>
 
