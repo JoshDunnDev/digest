@@ -1,6 +1,7 @@
 @import "@tryghost/shared-theme-assets/assets/css/v1/screen.css";
 @import "fonts.css";
 @import "home.css";
+@import "calculator.css";
 
 :root {
   --font-sans: Raleway, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica,
@@ -225,7 +226,7 @@ body {
 }
 
 body:not(.home-template) .gh-article-header {
-  padding-top: 8rem;
+  padding-top: 0;
   padding-bottom: 12rem;
 }
 

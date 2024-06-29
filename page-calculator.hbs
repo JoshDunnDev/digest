@@ -1,0 +1,37 @@
+{{!< default}}
+
+{{#post}}
+
+<main id="gh-main" class="gh-main">
+  <article class="gh-article {{post_class}}">
+    {{#match @page.show_title_and_feature_image}}
+      <header class="gh-article-header gh-canvas">
+          <h1 class="gh-article-title">{{title}}</h1>
+          {{#if custom_excerpt}}
+              <p class="gh-article-excerpt">{{custom_excerpt}}</p>
+          {{/if}}
+      </header>
+      {{> "feature-image"}}
+    {{/match}}
+
+    <section class="gh-canvas cal-content">
+      <div>
+        <div class="cal-tab-container">
+          <div class="cal-tab active" data-tab="stopLossCalculator" onclick="openTab('stopLossCalculator')">Stop Loss</div>
+          <div class="cal-tab" data-tab="positionSizeCalculator" onclick="openTab('positionSizeCalculator')">Position Size</div>
+        </div>
+        <div id="stopLossCalculator" class="cal-tab-content active">
+          {{> "calculator-form" formId="stopLossCalculatorForm" calculatorType="sl"}}
+          {{> "calculator-results" resultsType="sl"}}
+        </div>
+        <div id="positionSizeCalculator" class="cal-tab-content">
+          {{> "calculator-form" formId="positionSizeCalculatorForm" calculatorType="ps"}}
+          {{> "calculator-results" resultsType="ps"}}
+        </div>
+      </div>
+    </section>
+
+  </article>
+</main>
+
+{{/post}}
