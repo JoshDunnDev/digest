@@ -447,6 +447,11 @@ body:not(.home-template) .gh-article-image {
   margin: 4.8rem 0 !important;
 }
 
+.gh-foot {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
 @media (max-width: 767px) {
   .gh-head-description {
     display: none;
