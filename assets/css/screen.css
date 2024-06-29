@@ -14,10 +14,8 @@ body {
   font-feature-settings: "lnum";
 }
 
-.tag-template .gh-main,
-.post-template .gh-main,
-.page-template .gh-main {
-  padding-top: 0 !important;
+.gh-main {
+  padding: 0 !important;
 }
 
 .gh-head {

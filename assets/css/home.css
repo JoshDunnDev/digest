@@ -189,6 +189,10 @@
   gap: 10px;
 }
 
+.no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+
 /* Change layout at larger viewport sizes */
 @media (min-width: 768px) {
   .p-hero {
