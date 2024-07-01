@@ -181,6 +181,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const takeProfit =
       entry + (entry - Number(stopLoss).toFixed(2)) * profitLossRatio || 0;
     const profitAmount = takeProfit * shares - positionAmount || 0;
+    const stopLossOffset = stopLoss - entry;
+    const takeProfitOffset = takeProfit - entry;
 
     return {
       positionAmount,
@@ -189,6 +191,8 @@ document.addEventListener("DOMContentLoaded", function () {
       effectiveRisk,
       takeProfit,
       profitAmount,
+      stopLossOffset,
+      takeProfitOffset,
     };
   }
 
@@ -225,6 +229,8 @@ document.addEventListener("DOMContentLoaded", function () {
       effectiveRisk,
       takeProfit,
       profitAmount,
+      stopLossOffset,
+      takeProfitOffset,
     },
     prefix
   ) {
@@ -236,6 +242,8 @@ document.addEventListener("DOMContentLoaded", function () {
       effectiveRisk,
       takeProfit,
       profitAmount,
+      stopLossOffset,
+      takeProfitOffset,
     };
     Object.entries(fieldsToUpdate).forEach(([key, value]) => {
       if (document.getElementById(`${prefix}-${key}`)) {
@@ -279,6 +287,8 @@ document.addEventListener("DOMContentLoaded", function () {
       "effectiveRisk",
       "takeProfit",
       "profitAmount",
+      "stopLossOffset",
+      "takeProfitOffset",
     ].forEach((field) => {
       const element = document.getElementById(`${prefix}-${field}`);
       if (element) {
