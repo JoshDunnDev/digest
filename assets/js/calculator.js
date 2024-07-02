@@ -5,133 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const positionSizeCalculatorForm = document.getElementById(
     "positionSizeCalculatorForm"
   );
-  stopLossCalculatorForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    // Get the input values
-    const accountBlanace = Number(
-      document.getElementById("sl-accountBalance").value
-    );
-    const risk = Number(document.getElementById("sl-risk").value);
-    const profitLossRatio = Number(
-      document.getElementById("sl-profitLossRatio").value
-    );
-    const entry = Number(document.getElementById("sl-entry").value);
-    const shares = Number(document.getElementById("sl-shares").value);
-
-    // Perform the calculation
-    const positionAmount = entry * shares;
-    const toleratedRisk = accountBlanace * (risk / 100) || 0;
-    const stopLoss = (positionAmount - toleratedRisk) / shares || 0;
-    const effectiveRisk =
-      positionAmount - Number(stopLoss).toFixed(2) * shares || 0;
-    const takeProfit =
-      entry + (entry - Number(stopLoss).toFixed(2)) * profitLossRatio || 0;
-    const profitAmount = takeProfit * shares - positionAmount || 0;
-
-    // Display the result
-    document.getElementById("sl-stopLoss").innerText = `$${Number(
-      stopLoss
-    ).toFixed(2)}`;
-    document.getElementById("sl-positionAmount").innerText = `$${Number(
-      positionAmount
-    ).toFixed(2)}`;
-    document.getElementById("sl-toleratedRisk").innerText = `$${Number(
-      toleratedRisk
-    ).toFixed(2)}`;
-    document.getElementById("sl-takeProfit").innerText = `$${Number(
-      takeProfit
-    ).toFixed(2)}`;
-    document.getElementById("sl-effectiveRisk").innerText = `$${Number(
-      effectiveRisk
-    ).toFixed(2)}`;
-    document.getElementById("sl-profitAmount").innerText = `$${Number(
-      profitAmount
-    ).toFixed(2)}`;
-  });
-  stopLossCalculatorForm.addEventListener("reset", function (event) {
-    event.preventDefault();
-    document.getElementById("sl-symbol").value = "";
-    document.getElementById("sl-accountBalance").value = "";
-    document.getElementById("sl-risk").value = "";
-    document.getElementById("sl-profitLossRatio").value = "";
-    document.getElementById("sl-entry").value = "";
-    document.getElementById("sl-shares").value = "";
-  });
-  positionSizeCalculatorForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    // Get the input values
-    const accountBlanace = Number(
-      document.getElementById("ps-accountBalance").value
-    );
-    const risk = Number(document.getElementById("ps-risk").value);
-    const profitLossRatio = Number(
-      document.getElementById("ps-profitLossRatio").value
-    );
-    const entry = Number(document.getElementById("ps-entry").value);
-    const stopLoss = Number(document.getElementById("ps-stopLoss").value);
-
-    // Perform the calculation
-    const toleratedRisk = accountBlanace * (risk / 100) || 0;
-    const shares = Number(toleratedRisk / (entry - stopLoss)).toFixed(0) || 0;
-    const positionAmount = entry * shares;
-    const effectiveRisk =
-      positionAmount - Number(stopLoss).toFixed(2) * shares || 0;
-    const takeProfit =
-      entry + (entry - Number(stopLoss).toFixed(2)) * profitLossRatio || 0;
-    const profitAmount = takeProfit * shares - positionAmount || 0;
-
-    // Display the result
-    document.getElementById("ps-shares").innerText = `${Number(shares).toFixed(
-      0
-    )}`;
-    document.getElementById("ps-positionAmount").innerText = `$${Number(
-      positionAmount
-    ).toFixed(2)}`;
-    document.getElementById("ps-toleratedRisk").innerText = `$${Number(
-      toleratedRisk
-    ).toFixed(2)}`;
-    document.getElementById("ps-takeProfit").innerText = `$${Number(
-      takeProfit
-    ).toFixed(2)}`;
-    document.getElementById("ps-effectiveRisk").innerText = `$${Number(
-      effectiveRisk
-    ).toFixed(2)}`;
-    document.getElementById("ps-profitAmount").innerText = `$${Number(
-      profitAmount
-    ).toFixed(2)}`;
-  });
-  positionSizeCalculatorForm.addEventListener("reset", function (event) {
-    event.preventDefault();
-    document.getElementById("ps-symbol").value = "";
-    document.getElementById("ps-accountBalance").value = "";
-    document.getElementById("ps-risk").value = "";
-    document.getElementById("ps-profitLossRatio").value = "";
-    document.getElementById("ps-entry").value = "";
-    document.getElementById("ps-stopLoss").value = "";
-  });
-});
-
-function openTab(tabId) {
-  // const tabs = document.querySelectorAll(".cal-tab-content");
-  // tabs.forEach((tab) => {
-  //   tab.style.display = "none";
-  // });
-  const tabContents = document.getElementsByClassName("cal-tab-content");
-  for (let i = 0; i < tabContents.length; i++) {
-    tabContents[i].classList.remove("active");
-  }
-  document.getElementById(tabId).classList.add("active");
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  const stopLossCalculatorForm = document.getElementById(
-    "stopLossCalculatorForm"
-  );
-  const positionSizeCalculatorForm = document.getElementById(
-    "positionSizeCalculatorForm"
-  );
 
   function calculateStopLoss() {
     const inputs = getInputs("sl");
@@ -146,7 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function getInputs(prefix) {
-    return {
+    const inputs = {
+      symbol: document.getElementById(`${prefix}-symbol`).value,
       accountBalance: Number(
         document.getElementById(`${prefix}-accountBalance`).value
       ),
@@ -164,6 +38,10 @@ document.addEventListener("DOMContentLoaded", function () {
           ? Number(document.getElementById(`${prefix}-stopLoss`).value)
           : undefined,
     };
+
+    localStorage.setItem(`${prefix}-form`, JSON.stringify(inputs));
+
+    return inputs;
   }
 
   function performStopLossCalculation({
@@ -300,11 +178,13 @@ document.addEventListener("DOMContentLoaded", function () {
   stopLossCalculatorForm.addEventListener("reset", function (event) {
     event.preventDefault();
     resetForm("sl");
+    localStorage.removeItem("sl-form");
   });
 
   positionSizeCalculatorForm.addEventListener("reset", function (event) {
     event.preventDefault();
     resetForm("ps");
+    localStorage.removeItem("ps-form");
   });
 });
 
@@ -316,3 +196,20 @@ function openTab(tabId) {
   Array.from(tabContents).forEach((tab) => tab.classList.remove("active"));
   document.getElementById(tabId).classList.add("active");
 }
+
+function loadLocalIntoInputs(prefix) {
+  const values = localStorage.getItem(`${prefix}-form`);
+  if (values) {
+    const parsedValues = JSON.parse(values);
+    Object.entries(parsedValues).forEach(([key, value]) => {
+      if (document.getElementById(`${prefix}-${key}`)) {
+        document.getElementById(`${prefix}-${key}`).value = value;
+      }
+    });
+  }
+}
+
+window.addEventListener("load", () => {
+  loadLocalIntoInputs("sl");
+  loadLocalIntoInputs("ps");
+});
