@@ -82,7 +82,11 @@ document.addEventListener("DOMContentLoaded", function () {
     stopLoss,
   }) {
     const toleratedRisk = accountBalance * (risk / 100) || 0;
-    const shares = Math.round(toleratedRisk / (entry - stopLoss)) || 0;
+    let shares = Math.round(toleratedRisk / (entry - stopLoss)) || 0;
+    if (shares * entry > accountBalance) {
+      shares = Math.floor(accountBalance / entry);
+    }
+
     const positionAmount = entry * shares;
     const effectiveRisk = positionAmount - stopLoss * shares || 0;
     const takeProfit = entry + (entry - stopLoss) * profitLossRatio || 0;
