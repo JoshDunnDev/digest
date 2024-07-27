@@ -11,7 +11,7 @@
   padding: 10px 20px;
   background-color: var(--color-light-gray);
   font-weight: 700;
-  width: 50%;
+  flex: 1;
   text-align: center;
 }
 
@@ -35,7 +35,7 @@
 .cal-tab-content {
   display: none;
   border: 1px solid var(--color-mid-gray);
-  border-radius: 0 0 8px 8px;
+  border-radius: 8px;
   padding: 20px;
 }
 
@@ -50,10 +50,50 @@
   font-weight: 700;
 }
 
+.cal-swap-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .cal-input-container {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+}
+
+input,
+select {
+  height: 32px;
+}
+
+#ps-stopLossInput,
+#ps-offset {
+  flex: 1;
+}
+
+#stop-container,
+#offset-container,
+#stopLossOffsetResult,
+#stopLossResult {
+  display: none !important;
+}
+
+#stop-container.active,
+#offset-container.active {
+  display: flex !important;
+}
+
+.cal-swap-button {
+  background-color: var(--color-lighter-gray);
+  border: 1px solid rgb(118, 118, 118);
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  width: 40px;
+  border-radius: 2px;
+  height: 32px;
+  cursor: pointer;
 }
 
 .cal-input-container:first-child {
@@ -111,6 +151,11 @@
   display: flex;
   gap: 20px;
   text-align: center;
+}
+
+#stopLossOffsetResult.active,
+#stopLossResult.active {
+  display: block !important;
 }
 
 .cal-result {

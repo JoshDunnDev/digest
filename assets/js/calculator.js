@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const positionSizeCalculatorForm = document.getElementById(
     "positionSizeCalculatorForm"
   );
+  const swapButtonOffset = document.getElementById("swapButtonOffset");
+  const swapButtonStop = document.getElementById("swapButtonStop");
 
   function calculateStopLoss() {
     const inputs = getInputs("sl");
@@ -19,8 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function getInputs(prefix) {
+    const stopLoss = document.getElementById("ps-stopLossInput");
+    const offset = document.getElementById("ps-offset");
     const inputs = {
       symbol: document.getElementById(`${prefix}-symbol`).value,
+      positionType: document.getElementById(`${prefix}-positionType`).value,
       accountBalance: Number(
         document.getElementById(`${prefix}-accountBalance`).value
       ),
@@ -34,9 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
           ? Number(document.getElementById(`${prefix}-shares`).value)
           : undefined,
       stopLoss:
-        prefix === "ps"
-          ? Number(document.getElementById(`${prefix}-stopLoss`).value)
-          : undefined,
+        prefix === "ps" && stopLoss.value ? Number(stopLoss.value) : undefined,
+      offset:
+        prefix === "ps" && offset.value ? Number(offset.value) : undefined,
     };
 
     localStorage.setItem(`${prefix}-form`, JSON.stringify(inputs));
@@ -80,17 +85,30 @@ document.addEventListener("DOMContentLoaded", function () {
     profitLossRatio,
     entry,
     stopLoss,
+    offset,
+    positionType,
   }) {
+    const isShort = positionType === "short";
+    if (isShort && offset) {
+      offset = offset * -1;
+    }
+    const stopLossValue = stopLoss || entry - offset || 0;
     const toleratedRisk = accountBalance * (risk / 100) || 0;
-    let shares = Math.round(toleratedRisk / (entry - stopLoss)) || 0;
+    let shares =
+      (isShort ? -1 : 1) *
+        Math.round(toleratedRisk / (entry - stopLossValue)) || 0;
     if (shares * entry > accountBalance) {
       shares = Math.floor(accountBalance / entry);
     }
 
     const positionAmount = entry * shares;
-    const effectiveRisk = positionAmount - stopLoss * shares || 0;
-    const takeProfit = entry + (entry - stopLoss) * profitLossRatio || 0;
-    const profitAmount = takeProfit * shares - positionAmount || 0;
+    const effectiveRisk =
+      (isShort ? -1 : 1) * (positionAmount - stopLossValue * shares) || 0;
+    const takeProfit = entry + (entry - stopLossValue) * profitLossRatio || 0;
+    const profitAmount =
+      (isShort ? -1 : 1) * (takeProfit * shares - positionAmount) || 0;
+    const stopLossOffset = offset || stopLoss - entry;
+    const takeProfitOffset = takeProfit - entry;
 
     return {
       shares,
@@ -99,6 +117,9 @@ document.addEventListener("DOMContentLoaded", function () {
       effectiveRisk,
       takeProfit,
       profitAmount,
+      stopLossOffset,
+      takeProfitOffset,
+      stopLoss: stopLossValue,
     };
   }
 
@@ -136,31 +157,76 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  stopLossCalculatorForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    calculateStopLoss();
-  });
+  if (stopLossCalculatorForm) {
+    stopLossCalculatorForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      calculateStopLoss();
+    });
+
+    stopLossCalculatorForm.addEventListener("reset", function (event) {
+      event.preventDefault();
+      resetForm("sl");
+      localStorage.removeItem("sl-form");
+    });
+  }
 
   positionSizeCalculatorForm.addEventListener("submit", function (event) {
     event.preventDefault();
     calculatePositionSize();
   });
 
-  function resetForm(prefix) {
-    [
-      "symbol",
-      "accountBalance",
-      "risk",
-      "profitLossRatio",
-      "entry",
-      "shares",
-      "stopLoss",
-    ].forEach((field) => {
-      const element = document.getElementById(`${prefix}-${field}`);
-      if (element) {
-        element.value = "";
-      }
-    });
+  positionSizeCalculatorForm.addEventListener("reset", function (event) {
+    event.preventDefault();
+    resetForm("ps");
+    localStorage.removeItem("ps-form");
+  });
+
+  swapButtonOffset.addEventListener("click", function (event) {
+    event.preventDefault();
+    localStorage.setItem("stop-type", "offset");
+    document.getElementById("stop-container").classList.remove("active");
+    document.getElementById("offset-container").classList.add("active");
+    document.getElementById("stopLossOffsetResult").classList.remove("active");
+    document.getElementById("stopLossResult").classList.add("active");
+    document.getElementById("ps-offset").required = true;
+    const stopLoss = document.getElementById("ps-stopLossInput");
+    stopLoss.value = "";
+    stopLoss.required = false;
+    resetForm("ps", true);
+  });
+
+  swapButtonStop.addEventListener("click", function (event) {
+    event.preventDefault();
+    localStorage.setItem("stop-type", "stop");
+    document.getElementById("offset-container").classList.remove("active");
+    document.getElementById("stop-container").classList.add("active");
+    document.getElementById("stopLossResult").classList.remove("active");
+    document.getElementById("stopLossOffsetResult").classList.add("active");
+    document.getElementById("ps-stopLossInput").required = true;
+    const offset = document.getElementById("ps-offset");
+    offset.value = "";
+    offset.required = false;
+    resetForm("ps", true);
+  });
+
+  function resetForm(prefix, resultsOnly = false) {
+    if (!resultsOnly) {
+      [
+        "symbol",
+        "accountBalance",
+        "risk",
+        "profitLossRatio",
+        "entry",
+        "shares",
+        "stopLoss",
+        "offset",
+      ].forEach((field) => {
+        const element = document.getElementById(`${prefix}-${field}`);
+        if (element) {
+          element.value = "";
+        }
+      });
+    }
     [
       "positionAmount",
       "toleratedRisk",
@@ -178,19 +244,14 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-
-  stopLossCalculatorForm.addEventListener("reset", function (event) {
-    event.preventDefault();
-    resetForm("sl");
-    localStorage.removeItem("sl-form");
-  });
-
-  positionSizeCalculatorForm.addEventListener("reset", function (event) {
-    event.preventDefault();
-    resetForm("ps");
-    localStorage.removeItem("ps-form");
-  });
 });
+
+function addZeroes(num) {
+  num = num.toString();
+  const dec = num.split(".")[1];
+  const len = dec && dec.length > 2 ? dec.length : 2;
+  return Number(num).toFixed(len);
+}
 
 function openTab(tabId) {
   const tabs = document.getElementsByClassName("cal-tab");
@@ -206,14 +267,38 @@ function loadLocalIntoInputs(prefix) {
   if (values) {
     const parsedValues = JSON.parse(values);
     Object.entries(parsedValues).forEach(([key, value]) => {
+      if (prefix === "ps" && key === "stopLoss") {
+        key = "stopLossInput";
+      }
       if (document.getElementById(`${prefix}-${key}`)) {
-        document.getElementById(`${prefix}-${key}`).value = value;
+        document.getElementById(`${prefix}-${key}`).value =
+          typeof value === "number" &&
+          key !== "risk" &&
+          key !== "profitLossRatio"
+            ? addZeroes(value)
+            : value;
       }
     });
   }
 }
 
+function loadLocalStopType() {
+  const stopType = localStorage.getItem("stop-type");
+  if (stopType === "offset") {
+    document.getElementById("stop-container").classList.remove("active");
+    document.getElementById("offset-container").classList.add("active");
+    document.getElementById("stopLossOffsetResult").classList.remove("active");
+    document.getElementById("stopLossResult").classList.add("active");
+    const stopLoss = document.getElementById("ps-stopLossInput");
+    stopLoss.value = "";
+    stopLoss.required = false;
+  } else {
+    document.getElementById("ps-offset").required = false;
+  }
+}
+
 window.addEventListener("load", () => {
-  loadLocalIntoInputs("sl");
+  // loadLocalIntoInputs("sl");
   loadLocalIntoInputs("ps");
+  loadLocalStopType();
 });

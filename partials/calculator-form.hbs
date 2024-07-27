@@ -7,6 +7,18 @@
     <input type="text" id="{{calculatorType}}-symbol" placeholder="NVDA" />
   </div>
   <div class="cal-input-container">
+    <label class="cal-input-label" for="{{calculatorType}}-symbol">Position Type
+      <span class="cal-tooltip">&#9432;
+        <span class="cal-tooltiptext">The trade direction, whether long or
+          short.</span>
+      </span></label>
+
+    <select id="{{calculatorType}}-positionType">
+      <option value="long">Long</option>
+      <option value="short">Short</option>
+    </select>
+  </div>
+  <div class="cal-input-container">
     <label class="cal-input-label" for="{{calculatorType}}-entry">Entry ($)
       <span class="cal-required">*</span>
       <span class="cal-tooltip">&#9432;
@@ -42,7 +54,7 @@
   {{/match}}
 
   {{#match calculatorType "ps"}}
-    <div class="cal-input-container">
+    <div id="stop-container" class="cal-input-container active">
       <label class="cal-input-label" for="{{calculatorType}}-stopLoss">Stop Loss
         ($)
         <span class="cal-required">*</span>
@@ -50,13 +62,43 @@
           <span class="cal-tooltiptext">The price level at which you will set
             your stop loss.</span>
         </span></label>
-      <input
-        type="number"
-        id="{{calculatorType}}-stopLoss"
-        step="any"
-        placeholder="2.10"
-        required
-      />
+      <div class="cal-swap-container">
+        <input
+          type="number"
+          id="{{calculatorType}}-stopLossInput"
+          step="any"
+          placeholder="2.10"
+          required
+        />
+        <button id="swapButtonOffset" class="cal-swap-button" type="button">
+          <span>
+            +/-
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div id="offset-container" class="cal-input-container">
+      <label class="cal-input-label" for="{{calculatorType}}-offset">Stop Loss
+        Offset ($)
+        <span class="cal-required">*</span>
+        <span class="cal-tooltip">&#9432;
+          <span class="cal-tooltiptext">The offset amount of your stop loss.</span>
+        </span></label>
+      <div class="cal-swap-container">
+        <input
+          type="number"
+          id="{{calculatorType}}-offset"
+          step="any"
+          placeholder="0.10"
+          required
+        />
+        <button id="swapButtonStop" class="cal-swap-button" type="button">
+          <span>
+            $
+          </span>
+        </button>
+      </div>
     </div>
   {{/match}}
 

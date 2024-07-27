@@ -1,63 +1,5 @@
-{{!-- <div id="results-{{resultsType}}" class="calculator-results">
-  {{#match resultsType "sl"}}
-    <div class="cal-results-title">Stop Loss Calculation</div>
-  {{/match}}
-  {{#match resultsType "ps"}}
-    <div class="cal-results-title">Position Size Calculation</div>
-  {{/match}}
-  <section class="cal-results-section">
-    {{#match resultsType "sl"}}
-      <div class="cal-result">
-        <div id="{{resultsType}}-stopLoss" class="cal-result-text">$0</div>
-        <div>Stop Loss</div>
-      </div>
-    {{/match}}
-
-    {{#match resultsType "ps"}}
-      <div class="cal-result">
-        <div id="{{resultsType}}-shares" class="cal-result-text">0</div>
-        <div>Shares</div>
-      </div>
-    {{/match}}
-
-    <div class="cal-result">
-      <div id="{{resultsType}}-effectiveRisk" class="cal-result-text">$0</div>
-      <div>Effective Risk</div>
-    </div>
-  </section>
-
-  <section class="cal-results-section">
-    <div class="cal-result">
-      <div id="{{resultsType}}-takeProfit" class="cal-result-text">$0</div>
-      <div>Take Profit</div>
-    </div>
-
-    <div class="cal-result">
-      <div id="{{resultsType}}-profitAmount" class="cal-result-text">$0</div>
-      <div>Profit Amount</div>
-    </div>
-  </section>
-
-  <section class="cal-results-section">
-    <div class="cal-result">
-      <div id="{{resultsType}}-toleratedRisk" class="cal-result-text">$0</div>
-      <div>Tolerated Risk</div>
-    </div>
-
-    <div class="cal-result">
-      <div id="{{resultsType}}-positionAmount" class="cal-result-text">$0</div>
-      <div>Position Amount</div>
-    </div>
-  </section>
-</div> --}}
-
 <div id="results-{{resultsType}}" class="calculator-results">
-  {{#match resultsType "sl"}}
-    <div class="cal-results-title">Stop Loss Calculation</div>
-  {{/match}}
-  {{#match resultsType "ps"}}
-    <div class="cal-results-title">Position Size Calculation</div>
-  {{/match}}
+  {{! <div class="cal-results-title">Results</div> }}
   <section class="cal-results-section">
     {{#match resultsType "sl"}}
       <div class="cal-result">
@@ -80,30 +22,36 @@
         <div>Shares</div>
       </div>
 
-      <div class="cal-result">
-        <div id="{{resultsType}}-takeProfit" class="cal-result-text">$0</div>
-        <div>Take Profit</div>
+      <div id="stopLossOffsetResult" class="cal-result active">
+        <div
+          id="{{resultsType}}-stopLossOffset"
+          class="cal-result-text"
+        >$0</div>
+        <div>Stop Loss Offset</div>
+      </div>
+
+      <div id="stopLossResult" class="cal-result">
+        <div id="{{resultsType}}-stopLoss" class="cal-result-text">$0</div>
+        <div>Stop Loss</div>
       </div>
     {{/match}}
 
   </section>
 
-  {{#match resultsType "sl"}}
-    <section class="cal-results-section">
-      <div class="cal-result">
-        <div id="{{resultsType}}-takeProfit" class="cal-result-text">$0</div>
-        <div>Take Profit</div>
-      </div>
+  <section class="cal-results-section">
+    <div class="cal-result">
+      <div id="{{resultsType}}-takeProfit" class="cal-result-text">$0</div>
+      <div>Take Profit</div>
+    </div>
 
-      <div class="cal-result">
-        <div
-          id="{{resultsType}}-takeProfitOffset"
-          class="cal-result-text"
-        >$0</div>
-        <div>Take Profit Offset</div>
-      </div>
-    </section>
-  {{/match}}
+    <div class="cal-result">
+      <div
+        id="{{resultsType}}-takeProfitOffset"
+        class="cal-result-text"
+      >$0</div>
+      <div>Take Profit Offset</div>
+    </div>
+  </section>
 
   <section class="cal-results-section">
     <div class="cal-result">

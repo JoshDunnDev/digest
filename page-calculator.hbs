@@ -16,18 +16,18 @@
 
     <section class="gh-canvas cal-content">
       <div>
-        <div class="cal-tab-container">
+        {{!-- <div class="cal-tab-container">
           <div class="cal-tab active" data-tab="positionSizeCalculator" onclick="openTab('positionSizeCalculator')">Position Size</div>
           <div class="cal-tab" data-tab="stopLossCalculator" onclick="openTab('stopLossCalculator')">Stop Loss</div>
-        </div>
+        </div> --}}
         <div id="positionSizeCalculator" class="cal-tab-content active">
           {{> "calculator-form" formId="positionSizeCalculatorForm" calculatorType="ps"}}
           {{> "calculator-results" resultsType="ps"}}
         </div>
-        <div id="stopLossCalculator" class="cal-tab-content">
+        {{!-- <div id="stopLossCalculator" class="cal-tab-content">
           {{> "calculator-form" formId="stopLossCalculatorForm" calculatorType="sl"}}
           {{> "calculator-results" resultsType="sl"}}
-        </div>
+        </div> --}}
       </div>
     </section>
 
